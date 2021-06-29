@@ -83,3 +83,102 @@ const doWhileLoop = () => {
 	//print list of names
 	alert(listOfNames);
 };
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+// Logical Reasoning -
+
+// A simple scenario: Suppose Jon is waiting for the result of an exam, and he plans a vacation based on his exam score.
+// The exam result is divided into 4 rankings: A, B, C, and D:
+// If Jon gets an A, he rewards himself and goes for travel happily.
+// If Jon gets a B, the reward drops to normal shopping.
+// If Jon gets a C, he stays home and watches TV.
+// If Jon gets a D, he’ll go to the library and work on the subject.
+
+const travel = () => {
+	console.log('John goes on a vacation');
+};
+const shop = () => {
+	console.log('John goes shopping');
+};
+const watch = () => {
+	console.log('John watches Tv');
+};
+const library = () => {
+	console.log('John goes to the library');
+};
+
+// John's Ranking
+let rankings = [
+	'A',
+	'B',
+	'C',
+	'D'
+];
+let ranking = rankings[Math.floor(Math.random() * 4)];
+
+// Function to implement simple if-else
+const simpleConditional = () => {
+	// Using simple if else
+	if (ranking == 'A') travel();
+	else if (ranking == 'B') shop();
+	else if (ranking == 'C') watch();
+	else if (ranking == 'D') library();
+};
+
+// Function to implement switch case condition
+const switchCase = () => {
+	// Using switch case
+	switch (ranking) {
+		case 'A':
+			travel();
+			break;
+		case 'B':
+			shop();
+			break;
+		case 'C':
+			watch();
+			break;
+		case 'D':
+			library();
+			break;
+	}
+};
+
+// Function to implement Object Conditional Reasoning
+const objConditional = () => {
+	// Object for Object Conditional Reasoning
+	let strategies = {
+		A : travel,
+		B : shop,
+		C : watch,
+		D : library
+	};
+	let strategy = strategies[ranking];
+	strategy();
+};
+
+// Function to implement Map Conditional Reasoning
+const mapConditional = () => {
+	// Map for Map Conditional Reasoning
+	let strategies = new Map([
+		[
+			'A',
+			travel
+		],
+		[
+			'B',
+			shop
+		],
+		[
+			'C',
+			watch
+		],
+		[
+			'D',
+			library
+		]
+	]);
+	strategy = strategies.get(ranking);
+	strategy();
+};
