@@ -21,12 +21,12 @@
                     <input type="email" placeholder="Enter Email" name="email" id="email" required />
                 </div>
                 <div>
-                    <label for="pass">Password:</label>
+                    <label for="pass">Password: </label>
                     <input type="password" placeholder="Enter Password" name="pass" id="pass" required />
                 </div>
                 <div>
                     <label for="gender">Gender: </label>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" required>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Others">Others</option>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     
-                    <input type="radio" name="role" id="admin-role" value="Admin" />
+                    <input type="radio" name="role" id="admin-role" value="Admin" required/>
                     <label for="admin-role">Admin</label>
                     
                     <input type="radio" name="role" id="user-role" value="User" />
@@ -56,8 +56,16 @@
                     <input type="checkbox" name="Permissions" id="perm4" value="perm4" />
                     <label for="perm4">Permission 4 </label>
                 </div>
-                <button>Submit</button>
+                <button type = 'submit'>Submit</button>
             </form>
+            <div class = 'Details'>
+                <div class = 'content' id = 'confirmEmail'></div>
+                <div class = 'content' id = 'confirmPassword'></div>
+                <div class = 'content' id = 'confirmGender'></div>
+                <div class = 'content' id = 'confirmRole'></div>
+                <div class = 'content' id = 'confirmPermissions'></div>
+                <button type = 'submit'>Confirm</button>
+            </div>
         </div>
     </div>
     <script src="index.js" defer></script>
