@@ -66,7 +66,7 @@ app.post('/articles/add', (req, res) => {
 });
 
 //Get single article
-app.get('/article/:id', (req, res) => {
+app.get('/articles/:id', (req, res) => {
 	Article.findById(req.params.id, (err, article) => {
 		if (err) {
 			console.log(err);
@@ -74,6 +74,53 @@ app.get('/article/:id', (req, res) => {
 		else {
 			res.render('article', { article: article });
 		}
+	});
+});
+
+// Load edit form
+app.get('/articles/edit/:id', (req, res) => {
+	Article.findById(req.params.id, (err, article) => {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.render('edit_article', { title: 'Edit Article', article: article });
+		}
+	});
+});
+
+// Update submit PUT route
+app.post('/articles/edit/:id', (req, res) => {
+	let article = {};
+	article.title = req.body.title;
+	article.author = req.body.author;
+	article.body = req.body.body;
+
+	let query = { _id: req.params.id };
+
+	Article.findOneAndUpdate(query, article, (err) => {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		else {
+			// req.flash('success', 'Article Added');
+			res.redirect('/');
+		}
+	});
+});
+
+// Delete route
+app.delete('/articles/:id', (req, res) => {
+	const query = { _id: req.params.id };
+	Article.findById(req.params.id, (err, article) => {
+		Article.remove(query, (err) => {
+			if (err) {
+				console.log(err);
+				res.status(404).end();
+			}
+			else res.send('Success');
+		});
 	});
 });
 
