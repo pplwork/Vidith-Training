@@ -2,9 +2,34 @@ doctype html
 html 
     head
         title KnowledgeBase
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
     body
-        block content
-        br
-        hr
-        footer
-            p Copyright &copy; 2021 
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+            .container
+                a.navbar-brand(href='#') KnowledgeBase
+                button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarSupportedContent.collapse.navbar-collapse
+                    ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                        li.nav-item
+                            a.nav-link(href='/') Home
+                        
+                        li.nav-item
+                            a.nav-link(href='/articles/add') Add Article 
+                    ul.nav.navbar-nav.navbar-right 
+                        if user
+                            li.nav-item 
+                                a.nav-link(href='/users/logout') logout
+                        else
+                            li.nav-item 
+                                a.nav-link(href='/users/register') Register 
+                            li.nav-item 
+                                a.nav-link(href='/users/login') Login
+        .container
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy; 2021 
+        script(src="/bower_components/jquery/dist/jquery.js")
+        script(src="/bower_components/bootstrap/dist/js/bootstrap.js")

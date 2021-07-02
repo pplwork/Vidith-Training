@@ -18,6 +18,10 @@ db.once('open', () => {
 // Check for db errors
 db.on('error', (err) => console.log(err));
 
+// Set public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Using body-parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -57,6 +61,18 @@ app.post('/articles/add', (req, res) => {
 		else {
 			// req.flash('success', 'Article Added');
 			res.redirect('/');
+		}
+	});
+});
+
+//Get single article
+app.get('/article/:id', (req, res) => {
+	Article.findById(req.params.id, (err, article) => {
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.render('article', { article: article });
 		}
 	});
 });
