@@ -1,8 +1,21 @@
 const express = require('express');
 const path = require('path');
+const DB_CONFIG = require('./config/database');
 
 // Init app
 const app = express();
+
+mongoose.connect(DB_CONFIG.database);
+let db = mongoose.connection;
+
+db.once('open', () => {
+	console.log('connected to mongoDB');
+});
+
+db.on('error', (err) => console.log(err));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Setting view engine
 app.set('views', path.join(__dirname, 'views'));
