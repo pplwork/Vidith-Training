@@ -1,0 +1,40 @@
+.heading {
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(70, 108, 190, 0.863);
+	color: rgb(255, 255, 255);
+	border-radius: 5px 5px 0 0;
+	margin: 0px;
+}
+
+.timer {
+	font-family: 'Teko', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 50px;
+	padding: 30px 0px;
+}
+
+.hour,
+.min,
+.sec,
+.msec {
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	background-color: rgba(62, 104, 184, 0.76);
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 5px;
+}
+
+.action {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

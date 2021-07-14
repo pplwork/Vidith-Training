@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Timer from './components/Timer';
 import Action from './components/Action';
+import Lap from './components/Lap';
 
 class App extends Component {
 	constructor () {
 		super();
 		this.state = {
+			laps        : [],
 			started     : false,
 			timeElapsed : 0
 		};
@@ -38,16 +40,46 @@ class App extends Component {
 
 	resetTimer = () => {
 		this.setState({
+			laps        : [],
 			started     : false,
 			timeElapsed : 0
 		});
 	};
+
+	laps = () => {
+		if (this.state.started) {
+			this.setState((prev) => {
+				return {
+					...prev,
+					laps : [
+						...prev.laps,
+						{
+							splitTime : prev.timeElapsed,
+							lapTime   :
+
+									prev.laps.length > 0 ? prev.timeElapsed - prev.laps.splice(-1)[0].splitTime :
+									prev.timeElapsed
+						}
+					]
+				};
+			});
+		}
+	};
 	render () {
 		return (
-			<div className='App'>
-				<Header />
-				<Timer timer={this.state} />
-				<Action timer={this.state} begin={this.beginTimer} pause={this.pauseTimer} reset={this.resetTimer} />
+			<div className='parent'>
+				<div className='main'>
+					<Header />
+					<Timer timer={this.state} />
+					<Action
+						timer={this.state}
+						begin={this.beginTimer}
+						pause={this.pauseTimer}
+						reset={this.resetTimer}
+						laps={this.laps}
+					/>
+					<Lap timer={this.state} />
+				</div>
 			</div>
 		);
 	}

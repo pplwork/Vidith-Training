@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Button.css';
 
 class StartButton extends Component {
 	constructor (props) {
@@ -28,7 +29,7 @@ class StartButton extends Component {
 						this.state.started ? this.pause() :
 						this.begin();
 				}}>
-				<button>
+				<button className='startButton'>
 					{
 						this.state.started ? 'Pause' :
 						'Start'}

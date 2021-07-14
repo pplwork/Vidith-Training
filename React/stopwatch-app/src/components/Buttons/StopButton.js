@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Button.css';
 
 class StopButton extends Component {
 	constructor (props) {
@@ -13,7 +14,7 @@ class StopButton extends Component {
 					onClick={() => {
 						this.stop();
 					}}>
-					<button>Stop</button>
+					<button className='stopButton'>Stop</button>
 				</div>
 			</React.Fragment>
 		);

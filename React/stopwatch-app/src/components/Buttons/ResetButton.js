@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Button.css';
 
 class ResetButton extends Component {
 	constructor (props) {
@@ -16,7 +17,7 @@ class ResetButton extends Component {
 				onClick={() => {
 					if (!this.started) this.reset();
 				}}>
-				<button>Reset</button>
+				<button className='resetButton'>Reset</button>
 			</div>
 		);
 	}

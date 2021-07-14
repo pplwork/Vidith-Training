@@ -1,0 +1,31 @@
+button {
+	width: 70px;
+	border: none;
+	outline: none;
+	color: #fff;
+	/* background-color: rgb(63, 47, 133); */
+	margin: 5px;
+	transition: all .5s;
+	font-weight: 600;
+	font-size: 1.2rem;
+}
+
+button:hover {
+	box-shadow: 2px 3px 3px rgba(27, 26, 26, 0.5);
+	cursor: pointer;
+}
+
+.startButton,
+.lapButton {
+	height: 70px;
+	border-radius: 50%;
+	background: linear-gradient(to right, rgb(10, 25, 161), rgb(99, 110, 175));
+}
+
+.stopButton,
+.resetButton {
+	width: 100px;
+	padding: 5px 0px;
+	border-radius: 20px;
+	background-color: rgb(75, 96, 221);
+}

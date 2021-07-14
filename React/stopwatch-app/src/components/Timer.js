@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles.css';
 
 class Timer extends Component {
 	constructor (props) {
@@ -26,19 +27,27 @@ class Timer extends Component {
 	render () {
 		return (
 			<React.Fragment>
-				<div>
-					{
-						this.hours >= 10 ? `${this.hours}:` :
-						`0${this.hours}:`}
-					{
-						this.minutes >= 10 ? `${this.minutes}:` :
-						`0${this.minutes}:`}
-					{
-						this.seconds >= 10 ? `${this.seconds}:` :
-						`0${this.seconds}:`}
-					{
-						this.milliseconds >= 10 ? `${this.milliseconds}` :
-						`0${this.milliseconds}`}
+				<div className='timer'>
+					<div className='hour'>
+						{
+							this.hours >= 10 ? `${this.hours}` :
+							`0${this.hours}`}
+					</div>:
+					<div className='min'>
+						{
+							this.minutes >= 10 ? `${this.minutes}` :
+							`0${this.minutes}`}
+					</div>:
+					<div className='sec'>
+						{
+							this.seconds >= 10 ? `${this.seconds}` :
+							`0${this.seconds}`}
+					</div>:
+					<div className='msec'>
+						{
+							this.milliseconds >= 10 ? `${this.milliseconds}` :
+							`0${this.milliseconds}`}
+					</div>
 				</div>
 			</React.Fragment>
 		);
