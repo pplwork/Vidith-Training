@@ -78,8 +78,9 @@ class App extends Component {
 						reset={this.resetTimer}
 						laps={this.laps}
 					/>
-					<Lap timer={this.state} />
 				</div>
+
+				<Lap timer={this.state} />
 			</div>
 		);
 	}

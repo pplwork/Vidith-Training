@@ -5,7 +5,7 @@
 	align-items: center;
 	background-color: rgba(70, 108, 190, 0.863);
 	color: rgb(255, 255, 255);
-	border-radius: 5px 5px 0 0;
+	border-radius: 20px 20px 0 0;
 	margin: 0px;
 }
 
@@ -37,4 +37,92 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.container {
+	background-color: transparent;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.lap-main {
+	width: 38%;
+	padding: 1rem;
+	border-radius: 2rem;
+	display: flex;
+	background-color: rgba(77, 51, 189, 0.548);
+	color: white;
+	font-family: "Montserrat", sans-serif;
+	align-items: center;
+}
+.lap-number {
+	flex: 1;
+	font-size: 1rem;
+}
+
+.lap-time {
+	flex: 2;
+	font-size: 0.6rem;
+	opacity: 1;
+	display: flex;
+	justify-content: space-between;
+}
+
+.lap-time > div {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	align-items: center;
+	justify-content: center;
+	color: white;
+}
+
+.lap-value {
+	font-size: 0.9rem;
+}
+
+@media (min-width: 2560px) {
+	.lap-main {
+		width: 28%;
+	}
+	.lap-time {
+		font-size: 1rem;
+	}
+	.lap-number {
+		font-size: 1.5rem;
+	}
+	.lap-value {
+		font-size: 1.5rem;
+	}
+}
+
+@media (max-width: 970px) {
+	.lap-main {
+		width: 58%;
+	}
+}
+
+@media (max-width: 680px) {
+	.lap-main {
+		width: 78%;
+	}
+	.lap-time {
+		font-size: 0.8rem;
+	}
+	.lap-number {
+		font-size: 1rem;
+	}
+	.lap-value {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 505px) {
+	.lap-main {
+		width: 88%;
+	}
 }
