@@ -1,37 +1,24 @@
 import React, { Component } from 'react';
 import './Button.css';
+import { connect } from 'react-redux';
+import { START_TIMER, SET_ID, STOP_TIMER } from '../../constants/rootConstants';
 
 class StartButton extends Component {
-	constructor (props) {
-		super(props);
-		this.begin = props.begin;
-		this.pause = props.pause;
-		this.timer = props.timer;
-		this.state = {
-			started : props.timer.started
-		};
-	}
-
-	componentDidUpdate (prevProps) {
-		if (prevProps.timer.started !== this.props.timer.started) {
-			this.setState({
-				started : this.props.timer.started
-			});
-		}
-	}
-
 	render () {
 		return (
 			<div
 				id='startBtn'
 				onClick={() => {
-
-						this.state.started ? this.pause() :
-						this.begin();
+					if (this.props.started) {
+						this.props.stopTime();
+					}
+					else {
+						this.props.setId(setInterval(this.props.startTime, 10));
+					}
 				}}>
 				<button className='startButton'>
 					{
-						this.state.started ? 'Pause' :
+						this.props.started ? 'Pause' :
 						'Start'}
 				</button>
 			</div>
@@ -39,4 +26,25 @@ class StartButton extends Component {
 	}
 }
 
-export default StartButton;
+const mapStateToProps = (state) => {
+	return {
+		started : state.started,
+		id      : state.id
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		startTime : () => {
+			dispatch({ type: START_TIMER });
+		},
+		setId     : (id) => {
+			dispatch({ type: SET_ID, payload: id });
+		},
+		stopTime  : () => {
+			dispatch({ type: STOP_TIMER });
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartButton);

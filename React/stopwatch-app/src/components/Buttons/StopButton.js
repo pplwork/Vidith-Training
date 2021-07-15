@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { STOP_TIMER } from '../../constants/rootConstants';
 import './Button.css';
+import { connect } from 'react-redux';
 
 class StopButton extends Component {
 	constructor (props) {
@@ -12,7 +14,7 @@ class StopButton extends Component {
 			<React.Fragment>
 				<div
 					onClick={() => {
-						this.stop();
+						this.props.stopTime();
 					}}>
 					<button className='stopButton'>Stop</button>
 				</div>
@@ -21,4 +23,12 @@ class StopButton extends Component {
 	}
 }
 
-export default StopButton;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		stopTime : () => {
+			dispatch({ type: STOP_TIMER });
+		}
+	};
+};
+
+export default connect(null, mapDispatchToProps)(StopButton);

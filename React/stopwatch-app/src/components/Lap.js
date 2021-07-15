@@ -1,23 +1,12 @@
 import React from 'react';
 import './styles.css';
+import convertToTime from '../convertToTime';
+import { connect } from 'react-redux';
 
-const Lap = ({ timer }) => {
-	const convertToTime = (ms) => {
-		let time = new Date(ms);
-		let h = time.getUTCHours();
-		let m = time.getUTCMinutes();
-		let s = time.getUTCSeconds();
-		ms = time.getUTCMilliseconds() / 10;
-		return {
-			h,
-			m,
-			s,
-			ms
-		};
-	};
+const Lap = (props) => {
 	return (
 		<div className='container'>
-			{timer.laps.map((lap, index) => {
+			{props.laps.map((lap, index) => {
 				return (
 					<div className='lap-main' key={index + 1}>
 						<div className='lap-number'>Lap {index + 1}</div>
@@ -26,34 +15,43 @@ const Lap = ({ timer }) => {
 								<div>Split Time</div>
 								<div className='lap-value'>
 									{
-										convertToTime(lap.splitTime).h >= 10 ? `${convertToTime(lap.splitTime).h}:` :
-										`0${convertToTime(lap.splitTime).h}:`}
+										convertToTime(lap.splitTime).hours >= 10 ? `${convertToTime(lap.splitTime)
+											.hours}:` :
+										`0${convertToTime(lap.splitTime).hours}:`}
 									{
-										convertToTime(lap.splitTime).m >= 10 ? `${convertToTime(lap.splitTime).m}:` :
-										`0${convertToTime(lap.splitTime).m}:`}
+										convertToTime(lap.splitTime).minutes >= 10 ? `${convertToTime(lap.splitTime)
+											.minutes}:` :
+										`0${convertToTime(lap.splitTime).minutes}:`}
 									{
-										convertToTime(lap.splitTime).s >= 10 ? `${convertToTime(lap.splitTime).s}:` :
-										`0${convertToTime(lap.splitTime).s}:`}
+										convertToTime(lap.splitTime).seconds >= 10 ? `${convertToTime(lap.splitTime)
+											.seconds}:` :
+										`0${convertToTime(lap.splitTime).seconds}:`}
 									{
-										convertToTime(lap.splitTime).ms >= 10 ? `${convertToTime(lap.splitTime).ms}` :
-										`0${convertToTime(lap.splitTime).ms}`}
+										convertToTime(lap.splitTime).milliseconds >= 10 ? `${convertToTime(
+											lap.splitTime
+										).milliseconds}` :
+										`0${convertToTime(lap.splitTime).milliseconds}`}
 								</div>
 							</div>
 							<div>
 								<div>Lap Time</div>
 								<div className='lap-value'>
 									{
-										convertToTime(lap.lapTime).h >= 10 ? `${convertToTime(lap.lapTime).h}:` :
-										`0${convertToTime(lap.lapTime).h}:`}
+										convertToTime(lap.lapTime).hours >= 10 ? `${convertToTime(lap.lapTime)
+											.hours}:` :
+										`0${convertToTime(lap.lapTime).hours}:`}
 									{
-										convertToTime(lap.lapTime).m >= 10 ? `${convertToTime(lap.lapTime).m}:` :
-										`0${convertToTime(lap.lapTime).m}:`}
+										convertToTime(lap.lapTime).minutes >= 10 ? `${convertToTime(lap.lapTime)
+											.minutes}:` :
+										`0${convertToTime(lap.lapTime).minutes}:`}
 									{
-										convertToTime(lap.lapTime).s >= 10 ? `${convertToTime(lap.lapTime).s}:` :
-										`0${convertToTime(lap.lapTime).s}:`}
+										convertToTime(lap.lapTime).seconds >= 10 ? `${convertToTime(lap.lapTime)
+											.seconds}:` :
+										`0${convertToTime(lap.lapTime).seconds}:`}
 									{
-										convertToTime(lap.lapTime).ms >= 10 ? `${convertToTime(lap.lapTime).ms}` :
-										`0${convertToTime(lap.lapTime).ms}`}
+										convertToTime(lap.lapTime).milliseconds >= 10 ? `${convertToTime(lap.lapTime)
+											.milliseconds}` :
+										`0${convertToTime(lap.lapTime).milliseconds}`}
 								</div>
 							</div>
 						</div>
@@ -64,4 +62,10 @@ const Lap = ({ timer }) => {
 	);
 };
 
-export default Lap;
+const mapStateToProps = (state) => {
+	return {
+		laps : state.laps
+	};
+};
+
+export default connect(mapStateToProps)(Lap);

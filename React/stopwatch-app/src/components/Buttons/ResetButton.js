@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 import './Button.css';
+import { connect } from 'react-redux';
+import { RESET_TIMER } from '../../constants/rootConstants';
 
 class ResetButton extends Component {
-	constructor (props) {
-		super(props);
-		this.reset = props.reset;
-		this.started = props.timer.started;
-	}
-	componentDidUpdate () {
-		this.started = this.props.timer.started;
-	}
-
 	render () {
 		return (
 			<div
 				onClick={() => {
-					if (!this.started) this.reset();
+					if (!this.started) this.props.resetTime();
 				}}>
 				<button className='resetButton'>Reset</button>
 			</div>
@@ -23,4 +16,18 @@ class ResetButton extends Component {
 	}
 }
 
-export default ResetButton;
+const mapStateToProps = (state) => {
+	return {
+		started : state.started
+	};
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		resetTime : () => {
+			dispatch({ type: RESET_TIMER });
+		}
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetButton);

@@ -5,13 +5,13 @@ import StopButton from './Buttons/StopButton';
 import LapsButton from './Buttons/LapsButton';
 import './styles.css';
 
-const Action = ({ timer, begin, pause, reset, laps }) => {
+const Action = () => {
 	return (
 		<div className='action'>
-			<StopButton stop={pause} />
-			<StartButton begin={begin} pause={pause} timer={timer} />
-			<LapsButton laps={laps} />
-			<ResetButton reset={reset} timer={timer} />
+			<StopButton />
+			<StartButton />
+			<LapsButton />
+			<ResetButton />
 		</div>
 	);
 };
