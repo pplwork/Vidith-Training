@@ -1,12 +1,13 @@
 import React from 'react';
 import './styles.css';
 import convertToTime from '../convertToTime';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Lap = (props) => {
+const Lap = () => {
+	const laps = useSelector((state) => state.laps);
 	return (
 		<div className='container'>
-			{props.laps.map((lap, index) => {
+			{laps.map((lap, index) => {
 				return (
 					<div className='lap-main' key={index + 1}>
 						<div className='lap-number'>Lap {index + 1}</div>
@@ -62,10 +63,4 @@ const Lap = (props) => {
 	);
 };
 
-const mapStateToProps = (state) => {
-	return {
-		laps : state.laps
-	};
-};
-
-export default connect(mapStateToProps)(Lap);
+export default Lap;

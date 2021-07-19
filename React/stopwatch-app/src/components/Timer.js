@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './styles.css';
-import { connect } from 'react-redux';
 import convertToTime from '../convertToTime';
+import { useSelector } from 'react-redux';
 
-class Timer extends Component {
-	render () {
-		const { hours, minutes, seconds, milliseconds } = convertToTime(this.props.timeElapsed);
-		return (
-			<React.Fragment>
-				<div className='timer'>
-					<div className='hour'>
-						{
-							hours >= 10 ? `${hours}` :
-							`0${hours}`}
-					</div>:
-					<div className='min'>
-						{
-							minutes >= 10 ? `${minutes}` :
-							`0${minutes}`}
-					</div>:
-					<div className='sec'>
-						{
-							seconds >= 10 ? `${seconds}` :
-							`0${seconds}`}
-					</div>:
-					<div className='msec'>
-						{
-							milliseconds >= 10 ? `${milliseconds}` :
-							`0${milliseconds}`}
-					</div>
+const Timer = () => {
+	const timeElapsed = useSelector((state) => state.timeElapsed);
+	console.log(timeElapsed);
+	const { hours, minutes, seconds, milliseconds } = convertToTime(timeElapsed);
+	return (
+		<React.Fragment>
+			<div className='timer'>
+				<div className='hour'>
+					{
+						hours >= 10 ? `${hours}` :
+						`0${hours}`}
+				</div>:
+				<div className='min'>
+					{
+						minutes >= 10 ? `${minutes}` :
+						`0${minutes}`}
+				</div>:
+				<div className='sec'>
+					{
+						seconds >= 10 ? `${seconds}` :
+						`0${seconds}`}
+				</div>:
+				<div className='msec'>
+					{
+						milliseconds >= 10 ? `${milliseconds}` :
+						`0${milliseconds}`}
 				</div>
-			</React.Fragment>
-		);
-	}
-}
-
-const mapStateToProps = (state) => {
-	return {
-		timeElapsed : state.timeElapsed
-	};
+			</div>
+		</React.Fragment>
+	);
 };
 
-export default connect(mapStateToProps)(Timer);
+export default Timer;
