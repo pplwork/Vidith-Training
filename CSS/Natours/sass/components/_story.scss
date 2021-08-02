@@ -9,9 +9,9 @@
     font-size: $default-font-size;
     transform: skewX(-12deg);
     position: relative;
-    // @include respond(tab-port) {
-    //     width: 100%;
-    // }
+    @include respond(tab-port) {
+        width: 100%;
+    }
     &__shape {
         height: 15rem;
         width: 15rem;
@@ -21,9 +21,9 @@
         border-radius: 50%;
         overflow: hidden;
         transform: translateX(-3rem) skewX(12deg);
-        // @include respond(phone) {
-        //     transform: translateX(-3rem) skewX(12deg);
-        // }
+        @include respond(phone) {
+            transform: translateX(-3rem) skewX(12deg);
+        }
     }
     &__image {
         height: 100%;

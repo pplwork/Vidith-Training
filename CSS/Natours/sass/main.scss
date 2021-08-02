@@ -13,30 +13,8 @@
 @import "components/story";
 @import "components/bg-video";
 @import "components/form";
+@import "components/popup";
 @import "layout/header";
 @import "layout/grid";
 @import "layout/footer";
 @import "layout/navigation";
-@media screen and (max-width: 704px) {
-    html {
-        font-size: 55%;
-    }
-}
-
-@media screen and (max-width: 604px) {
-    html {
-        font-size: 45%;
-    }
-}
-
-@media screen and (max-width: 504px) {
-    html {
-        font-size: 38%;
-    }
-}
-
-@media screen and (max-width: 418px) {
-    html {
-        font-size: 30%;
-    }
-}
