@@ -6,20 +6,20 @@ import Action from './components/Action';
 import Lap from './components/Lap';
 
 class App extends Component {
-	constructor () {
+	constructor() {
 		super();
 		this.state = {
-			laps        : [],
-			started     : false,
-			timeElapsed : 0
+			laps: [],
+			started: false,
+			timeElapsed: 0
 		};
 	}
 	start = () => {
 		this.setState((prev) => {
 			return {
 				...prev,
-				started     : true,
-				timeElapsed : prev.timeElapsed + 10
+				started: true,
+				timeElapsed: prev.timeElapsed + 10
 			};
 		});
 	};
@@ -33,16 +33,16 @@ class App extends Component {
 		this.setState((prev) => {
 			return {
 				...prev,
-				started : false
+				started: false
 			};
 		});
 	};
 
 	resetTimer = () => {
 		this.setState({
-			laps        : [],
-			started     : false,
-			timeElapsed : 0
+			laps: [],
+			started: false,
+			timeElapsed: 0
 		});
 	};
 
@@ -51,24 +51,24 @@ class App extends Component {
 			this.setState((prev) => {
 				return {
 					...prev,
-					laps : [
+					laps: [
 						...prev.laps,
 						{
-							splitTime : prev.timeElapsed,
-							lapTime   :
-
-									prev.laps.length > 0 ? prev.timeElapsed - prev.laps.splice(-1)[0].splitTime :
-									prev.timeElapsed
+							splitTime: prev.timeElapsed,
+							lapTime:
+								prev.laps.length > 0
+									? prev.timeElapsed - prev.laps.splice(-1)[0].splitTime
+									: prev.timeElapsed
 						}
 					]
 				};
 			});
 		}
 	};
-	render () {
+	render() {
 		return (
-			<div className='parent'>
-				<div className='main'>
+			<div className="parent">
+				<div className="main">
 					<Header />
 					<Timer timer={this.state} />
 					<Action
