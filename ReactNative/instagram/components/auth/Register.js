@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Button, TextInput } from 'react-native';
 
 import firebase from 'firebase';
+import 'firebase/firestore';
 
 export class Register extends Component {
 	constructor(props) {
@@ -22,9 +23,15 @@ export class Register extends Component {
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then((result) => {
-				firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set({ name, email });
+				firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).set({
+					name,
+					email
+				});
+				console.log(result);
 			})
-			.catch((err) => console.log(err));
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	render() {
@@ -37,7 +44,8 @@ export class Register extends Component {
 					secureTextEntry={true}
 					onChangeText={(password) => this.setState({ password })}
 				/>
-				<Button onPress={() => this.onSignUp()} title="Sign up" />
+
+				<Button onPress={() => this.onSignUp()} title="Sign Up" />
 			</View>
 		);
 	}

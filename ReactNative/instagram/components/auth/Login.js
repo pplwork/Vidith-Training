@@ -23,7 +23,9 @@ export class Login extends Component {
 			.then((result) => {
 				console.log(result);
 			})
-			.catch((err) => console.log(err));
+			.catch((error) => {
+				console.log(error);
+			});
 	}
 
 	render() {
@@ -35,7 +37,8 @@ export class Login extends Component {
 					secureTextEntry={true}
 					onChangeText={(password) => this.setState({ password })}
 				/>
-				<Button onPress={() => this.onSignUp()} title="Sign in" />
+
+				<Button onPress={() => this.onSignUp()} title="Sign In" />
 			</View>
 		);
 	}

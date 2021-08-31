@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import Login from './Login';
+import { View, Button } from 'react-native';
 
 const Landing = ({ navigation }) => {
 	return (

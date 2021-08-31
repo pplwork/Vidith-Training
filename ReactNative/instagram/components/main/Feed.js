@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, FlatList, StyleSheet, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native';
+
 import firebase from 'firebase';
 require('firebase/firestore');
-
 import { connect } from 'react-redux';
 
 function Feed(props) {
@@ -10,35 +10,61 @@ function Feed(props) {
 
 	useEffect(
 		() => {
-			let posts = [];
-			if (props.usersLoaded === props.following.length) {
-				for (let i = 0; i < props.following.length; i++) {
-					const user = props.users.find((el) => el.uid === props.following[i]);
-					if (user !== undefined) {
-						posts = [ ...posts, user.posts ];
-					}
-				}
+			if (props.usersFollowingLoaded == props.following.length && props.following.length !== 0) {
+				props.feed.sort(function(x, y) {
+					return x.creation - y.creation;
+				});
+				setPosts(props.feed);
 			}
-			posts.sort((x, y) => {
-				return x.creation - y.creation;
-			});
-
-			setPosts(posts);
+			console.log(posts);
 		},
-		[ props.usersLoaded ]
+		[ props.usersFollowingLoaded, props.feed ]
 	);
 
+	const onLikePress = (userId, postId) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(userId)
+			.collection('userPosts')
+			.doc(postId)
+			.collection('likes')
+			.doc(firebase.auth().currentUser.uid)
+			.set({});
+	};
+	const onDislikePress = (userId, postId) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(userId)
+			.collection('userPosts')
+			.doc(postId)
+			.collection('likes')
+			.doc(firebase.auth().currentUser.uid)
+			.delete();
+	};
 	return (
 		<View style={styles.container}>
-			<View style={styles.GalleryContainer}>
+			<View style={styles.containerGallery}>
 				<FlatList
 					numColumns={1}
 					horizontal={false}
 					data={posts}
 					renderItem={({ item }) => (
-						<View style={styles.ImageContainer}>
-							<Text style={styles.container}>{}item.user.name</Text>
+						<View style={styles.containerImage}>
+							<Text style={styles.container}>{item.user.name}</Text>
 							<Image style={styles.image} source={{ uri: item.downloadURL }} />
+							{item.currentUserLike ? (
+								<Button title="Dislike" onPress={() => onDislikePress(item.user.uid, item.id)} />
+							) : (
+								<Button title="Like" onPress={() => onLikePress(item.user.uid, item.id)} />
+							)}
+							<Text
+								onPress={() =>
+									props.navigation.navigate('Comment', { postId: item.id, uid: item.user.uid })}
+							>
+								View Comments...
+							</Text>
 						</View>
 					)}
 				/>
@@ -51,13 +77,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	InfoContainer: {
+	containerInfo: {
 		margin: 20
 	},
-	GalleryContainer: {
-		margin: 20
+	containerGallery: {
+		flex: 1
 	},
-	ImageContainer: {
+	containerImage: {
 		flex: 1 / 3
 	},
 	image: {
@@ -65,12 +91,10 @@ const styles = StyleSheet.create({
 		aspectRatio: 1 / 1
 	}
 });
-
 const mapStateToProps = (store) => ({
 	currentUser: store.userState.currentUser,
 	following: store.userState.following,
-	users: store.usersState.users,
-	usersLoaded: store.usersState.usersLoaded
+	feed: store.usersState.feed,
+	usersFollowingLoaded: store.usersState.usersFollowingLoaded
 });
-
 export default connect(mapStateToProps, null)(Feed);
